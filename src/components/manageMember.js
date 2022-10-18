@@ -42,7 +42,7 @@ const ManageMember = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        toast.success(result.success);
+        toast.success("Successfully edited!!!");
         setNumber((prevState) => prevState + 1);
       });
   };
@@ -57,7 +57,7 @@ const ManageMember = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        toast.success(result.success);
+        toast.success("Successfully deleted!!!");
         const newMembersData = membersData.filter(
           (studentData) => studentData.id !== id
         );

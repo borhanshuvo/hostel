@@ -33,6 +33,9 @@ const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
+                  <p className="nav-link">{loggedInUser?.name}</p>
+                </li>
+                <li className="nav-item">
                   <p
                     className="nav-link fw-bolder"
                     style={{ cursor: "pointer" }}

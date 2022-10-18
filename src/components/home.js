@@ -1,11 +1,13 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import AddMember from "./addMember";
 import ManageMember from "./manageMember";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 
 const Home = () => {
+  let location = useLocation();
+  const path = location.pathname;
   return (
     <>
       <Navbar />
@@ -15,6 +17,13 @@ const Home = () => {
             <Sidebar />
           </div>
           <div className="col-md-10">
+            {path === "/dashboard" ? (
+              <h1 className="text-center mt-5 pt-5">
+                Welcome to Classic Hostel
+              </h1>
+            ) : (
+              ""
+            )}
             <Routes>
               <Route path="add-member" element={<AddMember />} />
               <Route path="manage-member" element={<ManageMember />} />

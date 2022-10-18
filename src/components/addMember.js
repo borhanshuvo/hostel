@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { UserContext } from "../App";
 
 const AddMember = () => {
@@ -27,6 +28,7 @@ const AddMember = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        toast.success("Successfully added!!!");
         e.target.reset();
       });
   };
