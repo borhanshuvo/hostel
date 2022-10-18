@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/home";
+import Login from "./components/login";
+import RequireAuth from "./components/requirAuth";
+export const UserContext = createContext();
 
-function App() {
+const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="overflow-hidden">
+      <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+        <Routes>
+          <Route path="/" index element={<Login />} />
+          <Route
+            path="/dashboard/*"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
