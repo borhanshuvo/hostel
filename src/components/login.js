@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { UserContext } from "../App";
 import infoEmoji from "../images/info-emoji.svg";
 import "../styles/login.css";
@@ -29,14 +30,17 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
-        localStorage.setItem("token", result.access_token);
-        setLoggedInUser({
-          email: result.email,
-          name: result.name,
-          token: result.access_token,
-        });
-        navigate("/dashboard");
+        if (result.success) {
+          localStorage.setItem("token", result.access_token);
+          setLoggedInUser({
+            email: result.email,
+            name: result.name,
+            token: result.access_token,
+          });
+          navigate("/dashboard");
+        } else {
+          toast.error("Authentication error!!!");
+        }
       });
   };
 
